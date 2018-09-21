@@ -264,3 +264,9 @@ func ScratchDir(t *testing.T, prefix string) string {
 
 	return abs
 }
+
+// FixturePath returns the absolute path to the desired fixture.
+func FixturePath(t *testing.T, fixture string) string {
+	t.Helper()
+	return filepath.Join(FindRoot(t), "fixtures", fixture)
+}
