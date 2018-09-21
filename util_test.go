@@ -26,7 +26,7 @@ func testExtractTarGz(t *testing.T, when spec.G, it spec.S) {
 	})
 
 	it("extracts the archive", func() {
-		err := libjavabuildpack.ExtractTarGz(filepath.Join("fixtures", "test-archive.tar.gz"), outDir, 0)
+		err := libjavabuildpack.ExtractTarGz(test.FixturePath(t, "test-archive.tar.gz"), outDir, 0)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -36,7 +36,7 @@ func testExtractTarGz(t *testing.T, when spec.G, it spec.S) {
 	})
 
 	it("skips stripped components", func() {
-		err := libjavabuildpack.ExtractTarGz(filepath.Join("fixtures", "test-archive.tar.gz"), outDir, 1)
+		err := libjavabuildpack.ExtractTarGz(test.FixturePath(t, "test-archive.tar.gz"), outDir, 1)
 		if err != nil {
 			t.Fatal(err)
 		}
