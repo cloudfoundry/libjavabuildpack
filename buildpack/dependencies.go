@@ -71,3 +71,13 @@ func (d Dependencies) Has(id string) bool {
 
 	return false
 }
+
+func (d Dependencies) String() string {
+	var result string
+
+	for _, c := range d {
+		result = fmt.Sprintf("%s\nID: %s Version: %s Stacks: %s", result, c.ID, c.Version.Version, c.Stacks)
+	}
+
+	return result
+}
