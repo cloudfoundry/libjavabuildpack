@@ -23,15 +23,15 @@ type Runner struct {
 }
 
 // Run makes Runner satisfy the helper.Runner interface.  This implementation collects the input.
-func (r *Runner) Run(bin string, dir string, args ...string) error {
-	r.Commands = append(r.Commands, Command{bin, dir, args})
+func (r *Runner) Run(bin string, args ...string) error {
+	r.Commands = append(r.Commands, Command{bin, args})
 	return nil
 }
 
 // RunWithOutput makes Runner satisfy the helper.Runner interface.  This implementation collects the input and return
 // configured output.
-func (r *Runner) RunWithOutput(bin string, dir string, args ...string) ([]byte, error) {
-	r.Commands = append(r.Commands, Command{bin, dir, args})
+func (r *Runner) RunWithOutput(bin string, args ...string) ([]byte, error) {
+	r.Commands = append(r.Commands, Command{bin, args})
 
 	output := r.Outputs[0]
 	r.Outputs = r.Outputs[1:]
@@ -41,6 +41,5 @@ func (r *Runner) RunWithOutput(bin string, dir string, args ...string) ([]byte, 
 
 type Command struct {
 	Bin  string
-	Dir  string
 	Args []string
 }

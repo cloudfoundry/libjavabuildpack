@@ -23,20 +23,24 @@ import (
 
 // CommandRunner is an empty struct to hang the Run method on.
 type CommandRunner struct {
+	Dir string
+	Env []string
 }
 
 // Run makes CommandRunner satisfy the Runner interface.  This implementation delegates to exec.Command.
-func (r CommandRunner) Run(bin string, dir string, args ...string) error {
+func (r CommandRunner) Run(bin string, args ...string) error {
 	cmd := exec.Command(bin, args...)
-	cmd.Dir = dir
+	cmd.Dir = r.Dir
+	cmd.Env = r.Env
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
 }
 
 // RunWithOutput makes CommandRunner satisfy the Runner interface.  This implementation delegates to exec.Command.
-func (r CommandRunner) RunWithOutput(bin string, dir string, args ...string) ([]byte, error) {
+func (r CommandRunner) RunWithOutput(bin string, args ...string) ([]byte, error) {
 	cmd := exec.Command(bin, args...)
-	cmd.Dir = dir
+	cmd.Dir = r.Dir
+	cmd.Env = r.Env
 	return cmd.CombinedOutput()
 }
