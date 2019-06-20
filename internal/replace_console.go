@@ -18,9 +18,9 @@ package internal
 
 import (
 	"fmt"
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"io/ioutil"
 	"os"
-	"testing"
 )
 
 // Console represents the standard console objects, stdin, stdout, and stderr.
@@ -34,7 +34,7 @@ type Console struct {
 }
 
 // Err returns a string representation of captured stderr.
-func (c Console) Err(t *testing.T) string {
+func (c Console) Err(t test_helper.TInterface) string {
 	t.Helper()
 
 	err := c.errWrite.Close()
@@ -51,7 +51,7 @@ func (c Console) Err(t *testing.T) string {
 }
 
 // In writes a string and closes the connection once complete.
-func (c Console) In(t *testing.T, string string) {
+func (c Console) In(t test_helper.TInterface, string string) {
 	t.Helper()
 
 	_, err := fmt.Fprint(c.inWrite, string)
@@ -66,7 +66,7 @@ func (c Console) In(t *testing.T, string string) {
 }
 
 // Out returns a string representation of captured stdout.
-func (c Console) Out(t *testing.T) string {
+func (c Console) Out(t test_helper.TInterface) string {
 	t.Helper()
 
 	err := c.outWrite.Close()
@@ -87,7 +87,7 @@ func (c Console) Out(t *testing.T) string {
 //
 // c, d := ReplaceConsole(t)
 // defer d()
-func ReplaceConsole(t *testing.T) (Console, func()) {
+func ReplaceConsole(t test_helper.TInterface) (Console, func()) {
 	t.Helper()
 
 	var console Console

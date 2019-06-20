@@ -17,15 +17,15 @@
 package test
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"io"
 	"os"
 	"path/filepath"
-	"testing"
 )
 
 // WriteFileFromReader writes a file with the given content from a io.Reader.  Before writing, it creates all required
 // parent directories for the file.
-func WriteFileFromReader(t *testing.T, filename string, perm os.FileMode, source io.Reader) {
+func WriteFileFromReader(t test_helper.TInterface, filename string, perm os.FileMode, source io.Reader) {
 	t.Helper()
 
 	if err := os.MkdirAll(filepath.Dir(filename), 0755); err != nil {

@@ -18,14 +18,14 @@ package test
 
 import (
 	"fmt"
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"testing"
 )
 
 // WriteFileWithPerm writes a file with specific permissions during testing.
-func WriteFileWithPerm(t *testing.T, filename string, perm os.FileMode, format string, args ...interface{}) {
+func WriteFileWithPerm(t test_helper.TInterface, filename string, perm os.FileMode, format string, args ...interface{}) {
 	t.Helper()
 
 	if err := os.MkdirAll(filepath.Dir(filename), 0755); err != nil {

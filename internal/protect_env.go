@@ -17,15 +17,15 @@
 package internal
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"os"
-	"testing"
 )
 
 // ProtectEnv protects a collection of environment variables.  Returns a function for use with defer in order to reset
 // the previous values.
 //
 // defer ProtectEnv(t, "alpha")()
-func ProtectEnv(t *testing.T, keys ...string) func() {
+func ProtectEnv(t test_helper.TInterface, keys ...string) func() {
 	t.Helper()
 
 	type state struct {

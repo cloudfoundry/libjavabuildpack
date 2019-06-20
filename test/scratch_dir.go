@@ -17,13 +17,13 @@
 package test
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"io/ioutil"
 	"path/filepath"
-	"testing"
 )
 
 // ScratchDir returns a safe scratch directory for tests to modify.
-func ScratchDir(t *testing.T, prefix string) string {
+func ScratchDir(t test_helper.TInterface, prefix string) string {
 	t.Helper()
 
 	tmp, err := ioutil.TempDir("", prefix)

@@ -16,12 +16,10 @@
 
 package test
 
-import (
-	"testing"
-)
+import "github.com/cloudfoundry/libcfbuildpack/test_helper"
 
 // WriteFile writes a file during testing.
-func WriteFile(t *testing.T, filename string, format string, args ...interface{}) {
+func WriteFile(t test_helper.TInterface, filename string, format string, args ...interface{}) {
 	t.Helper()
 
 	WriteFileWithPerm(t, filename, 0644, format, args...)

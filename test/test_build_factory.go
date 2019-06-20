@@ -20,10 +20,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	"os"
-	"path/filepath"
-	"testing"
-
 	"github.com/buildpack/libbuildpack/buildplan"
 	bpLayers "github.com/buildpack/libbuildpack/layers"
 	bpServices "github.com/buildpack/libbuildpack/services"
@@ -35,6 +31,9 @@ import (
 	"github.com/cloudfoundry/libcfbuildpack/layers"
 	"github.com/cloudfoundry/libcfbuildpack/logger"
 	"github.com/cloudfoundry/libcfbuildpack/services"
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
+	"os"
+	"path/filepath"
 )
 
 // BuildFactory is a factory for creating a test Build.
@@ -51,7 +50,7 @@ type BuildFactory struct {
 	// Runner is the used to capture commands executed outside the process.
 	Runner *Runner
 
-	t *testing.T
+	t test_helper.TInterface
 }
 
 // AddBuildPlan adds an entry to a build plan.
@@ -180,7 +179,7 @@ func (f *BuildFactory) newDependency(id string, version string, name string) bui
 }
 
 // NewBuildFactory creates a new instance of BuildFactory.
-func NewBuildFactory(t *testing.T) *BuildFactory {
+func NewBuildFactory(t test_helper.TInterface) *BuildFactory {
 	t.Helper()
 
 	root := ScratchDir(t, "build")

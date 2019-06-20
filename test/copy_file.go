@@ -17,13 +17,13 @@
 package test
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"os"
-	"testing"
 )
 
 // CopyFile copies source to destination.  Before writing, it creates all required parent directories for the
 // destination.
-func CopyFile(t *testing.T, source string, destination string) {
+func CopyFile(t test_helper.TInterface, source string, destination string) {
 	t.Helper()
 
 	s, err := os.Open(source)

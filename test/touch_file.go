@@ -17,14 +17,14 @@
 package test
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"testing"
 )
 
 // TouchFile writes a zero-length file during testing.
-func TouchFile(t *testing.T, elem ...string) {
+func TouchFile(t test_helper.TInterface, elem ...string) {
 	filename := filepath.Join(elem...)
 
 	if err := os.MkdirAll(filepath.Dir(filename), 0755); err != nil {

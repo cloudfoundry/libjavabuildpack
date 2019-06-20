@@ -17,15 +17,15 @@
 package internal
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"os"
-	"testing"
 )
 
 // ReplaceArgs replaces the current command line arguments (os.Args) with a new collection of values.  Returns a
 // function suitable for use with defer in order to reset the previous values
 //
 //  defer ReplaceArgs(t, "alpha")()
-func ReplaceArgs(t *testing.T, args ...string) func() {
+func ReplaceArgs(t test_helper.TInterface, args ...string) func() {
 	t.Helper()
 
 	previous := os.Args

@@ -17,15 +17,15 @@
 package internal
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"os"
-	"testing"
 )
 
 // ReplaceWorkingDirectory replaces the current working directory (os.Getwd()) with a new value.  Returns a function for
 // use with defer in order to reset the previous value
 //
 // defer ReplaceWorkingDirectory(t, "alpha")()
-func ReplaceWorkingDirectory(t *testing.T, dir string) func() {
+func ReplaceWorkingDirectory(t test_helper.TInterface, dir string) func() {
 	t.Helper()
 
 	previous, err := os.Getwd()

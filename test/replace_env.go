@@ -17,15 +17,15 @@
 package test
 
 import (
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 	"os"
-	"testing"
 )
 
 // ReplaceEnv replaces an environment variable.  Returns a function for use with defer in order to reset the previous
 // value.
 //
 // defer ReplaceEnv(t, "alpha", "bravo")()
-func ReplaceEnv(t *testing.T, key string, value string) func() {
+func ReplaceEnv(t test_helper.TInterface, key string, value string) func() {
 	t.Helper()
 
 	previous, ok := os.LookupEnv(key)

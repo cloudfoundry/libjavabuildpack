@@ -17,15 +17,14 @@
 package test
 
 import (
-	"os"
-	"path/filepath"
-	"testing"
-
 	"github.com/buildpack/libbuildpack/buildplan"
 	bp "github.com/buildpack/libbuildpack/services"
 	"github.com/buildpack/libbuildpack/stack"
 	"github.com/cloudfoundry/libcfbuildpack/detect"
 	"github.com/cloudfoundry/libcfbuildpack/services"
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
+	"os"
+	"path/filepath"
 )
 
 // DetectFactory is a factory for creating a test Detect.
@@ -42,7 +41,7 @@ type DetectFactory struct {
 	// Runner is the used to capture commands executed outside the process.
 	Runner *Runner
 
-	t *testing.T
+	t test_helper.TInterface
 }
 
 // AddBuildPlan adds an entry to a build plan.
@@ -68,7 +67,7 @@ func (f *DetectFactory) AddService(name string, credentials services.Credentials
 }
 
 // NewDetectFactory creates a new instance of DetectFactory.
-func NewDetectFactory(t *testing.T) *DetectFactory {
+func NewDetectFactory(t test_helper.TInterface) *DetectFactory {
 	t.Helper()
 
 	root := ScratchDir(t, "detect")

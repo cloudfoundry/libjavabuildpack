@@ -17,13 +17,12 @@
 package internal
 
 import (
-	"testing"
-
 	"github.com/Masterminds/semver"
 	"github.com/cloudfoundry/libcfbuildpack/buildpack"
+	"github.com/cloudfoundry/libcfbuildpack/test_helper"
 )
 
-func NewTestVersion(t *testing.T, version string) buildpack.Version {
+func NewTestVersion(t test_helper.TInterface, version string) buildpack.Version {
 	t.Helper()
 
 	v, err := semver.NewVersion(version)
