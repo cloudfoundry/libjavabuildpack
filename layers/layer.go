@@ -17,9 +17,11 @@
 package layers
 
 import (
+	"fmt"
 	"reflect"
 
 	"github.com/buildpack/libbuildpack/layers"
+	"github.com/cloudfoundry/libcfbuildpack/helper"
 	"github.com/cloudfoundry/libcfbuildpack/logger"
 	"github.com/fatih/color"
 )
@@ -129,6 +131,13 @@ func (l Layer) Contribute(expected logger.Identifiable, contributor LayerContrib
 	if err := contributor(l); err != nil {
 		l.Logger.Debug("Error during contribution")
 		return err
+	}
+
+	if exists, err := helper.FileExists(l.Root); err != nil {
+		return err
+	} else if !exists {
+		name, _ := expected.Identity()
+		return fmt.Errorf("expected %s layer contribution", name)
 	}
 
 	return l.WriteMetadata(expected, flags...)

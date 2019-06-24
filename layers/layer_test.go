@@ -98,6 +98,7 @@ Bravo = 1
 
 			g.Expect(layer.Contribute(metadata{"test-value", 1}, func(layer layers.Layer) error {
 				contributed = true
+				test.TouchFile(t, layer.Root, "test-file")
 				return nil
 			})).To(Succeed())
 
@@ -113,6 +114,13 @@ Bravo = 1
 
 			g.Expect(filepath.Join(layer.Root, "test-file")).To(BeARegularFile())
 		})
+
+		it("returns an error if the contributor does not populate the layer", func() {
+			g.Expect(layer.Contribute(metadata{"test-value", 1}, func(layer layers.Layer) error {
+				return nil
+			})).To(MatchError("expected test-value layer contribution"))
+		})
+
 	}, spec.Report(report.Terminal{}))
 }
 
